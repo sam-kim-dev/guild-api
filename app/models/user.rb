@@ -20,6 +20,6 @@ class User < ApplicationRecord
   end
 
   def messages_from(user)
-    recent_received_messages.where(sender: user)
+    received_messages.where(sender: user).or(sent_messages.where(recipient: user)).recent
   end
 end
