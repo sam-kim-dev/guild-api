@@ -8,6 +8,8 @@ class User < ApplicationRecord
            foreign_key: :recipient_id,
            dependent: :delete_all
 
+  validates :name, presence: true
+
   def recent_received_messages
     received_messages.recent
   end
