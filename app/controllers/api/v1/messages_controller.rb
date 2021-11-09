@@ -1,12 +1,12 @@
 class Api::V1::MessagesController < ApplicationController
   def index
-    @messages = Message.all
+    @messages = current_user.messages
 
     render json: @messages
   end
 
   def create
-    @message = Message.new(message_params)
+    @message = Message.new(message_params.merge(sender: current_user))
 
     if @message.save
       render json: @message, status: :created
@@ -23,6 +23,6 @@ private
 
   def message_params
     params.require(:data)
-          .permit(:body, :sender_id, :recipient_id)
+          .permit(:body, :recipient_id)
   end
 end
