@@ -5,6 +5,13 @@ class Api::V1::MessagesController < ApplicationController
     render json: @messages
   end
 
+  def show
+    sender = User.find(params.require(:sender_id))
+    @messages = current_user.messages_from(sender)
+
+    render json: @messages
+  end
+
   def create
     @message = Message.new(message_params.merge(sender: current_user))
 
