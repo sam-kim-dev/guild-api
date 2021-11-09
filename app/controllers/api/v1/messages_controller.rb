@@ -6,7 +6,7 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def show
-    sender = User.find(params.require(:sender_id))
+    sender = User.find(params.require(:user_id))
     @messages = current_user.messages_from(sender)
 
     render json: @messages
