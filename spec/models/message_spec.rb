@@ -50,6 +50,10 @@ RSpec.describe Message, type: :model do
   end
 
   describe "querying for recent messages" do
+    after do
+      Message.recency_threshold_days = 30
+    end
+
     it "returns messages within the threshold" do
       Message.recency_threshold_days = 1
 
@@ -66,6 +70,10 @@ RSpec.describe Message, type: :model do
   end
 
   describe "limiting recent messages" do
+    after do
+      Message.recent_limit = 100
+    end
+
     it "returns messages up to a limit" do
       recent_message = Message.create!(
         created_at: 1.minute.ago, body: "Cowabunga, dude!", sender: sender, recipient: recipient
