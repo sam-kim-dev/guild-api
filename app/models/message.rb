@@ -4,6 +4,8 @@ class Message < ApplicationRecord
   belongs_to :sender,
              class_name: "User"
 
+  validates :body, presence: true
+
   class_attribute :recency_threshold_days,
                   default: Integer(ENV.fetch("MESSAGE_RECENCY_THRESHOLD_DAYS", 30))
 
