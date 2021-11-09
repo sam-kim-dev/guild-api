@@ -10,8 +10,12 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  def recent_received_messages
-    received_messages.recent
+  def messages
+    received_messages.or(sent_messages)
+  end
+
+  def recent_messages
+    messages.recent
   end
 
   def messages_from(user)
