@@ -8,13 +8,6 @@ class User < ApplicationRecord
            foreign_key: :recipient_id,
            dependent: :delete_all
 
-  def messages
-    Message.recent
-           .where(
-             'recipient_id = :user_id OR sender_id = :user_id', user_id: self.id
-           )
-  end
-
   def recent_received_messages
     received_messages.recent
   end

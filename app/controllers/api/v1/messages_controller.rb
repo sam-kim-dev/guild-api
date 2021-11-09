@@ -24,10 +24,6 @@ class Api::V1::MessagesController < ApplicationController
 
 private
 
-  def set_message
-    @message = Message.find(params[:id])
-  end
-
   def message_params
     params.require(:data)
           .permit(:body, :recipient_id)
