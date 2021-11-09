@@ -9,6 +9,17 @@ class User < ApplicationRecord
            dependent: :delete_all
 
   def messages
-    Message.where('recipient_id = :user_id OR sender_id = :user_id', user_id: self.id)
+    Message.recent
+           .where(
+             'recipient_id = :user_id OR sender_id = :user_id', user_id: self.id
+           )
+  end
+
+  def recent_received_messages
+    received_messages.recent
+  end
+
+  def messages_from(user)
+    recent_received_messages.where(sender: user)
   end
 end
