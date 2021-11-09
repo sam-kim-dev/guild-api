@@ -14,6 +14,9 @@ messages or all messages in last 30 days.
 
 ## Running Locally
 
+- Ruby Version: 2.7.3
+- Rails Version: 6.1.4.1
+
 ```
 git clone https://github.com/sam-kim-dev/guild-api.git
 cd guild-api
